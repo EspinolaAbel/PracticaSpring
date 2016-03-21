@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE beans PUBLIC "-//SPRING/DTD BEAN 2.0/EN" "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
 
-<beans>
+<beans> <!-- default-init-method="metodo" default-destroy-method="otro metodo". Metodos que son llamados por todos los bean definidos. Los beans que ejecuten estos métodos deben tener estos metodos definidos.-->
 	
 	<bean id="point" class="practica.Point" scope="prototype">
 	</bean>
 	
-	<bean id="triangle" class="practica.Triangle">
+	<bean id="triangle" class="practica.Triangle" init-method="miMetodoDeInicio" destroy-method="miMetodoDeDestruccion">
 		<property name="listOfPoints">
 			<list>
 				<ref bean="point"></ref>
