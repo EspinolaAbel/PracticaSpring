@@ -1,29 +1,16 @@
 package practica;
 
+import java.util.List;
+
 public class Triangle {
 	
-	private Point pointA;
-	private Point pointB;
-	private Point pointC;
-	
-	public Point getPointA() {
-		return pointA;
+	private List<Point> listOfPoints;
+
+	public List<Point> getListOfPoints() {
+		return listOfPoints;
 	}
-	public void setPointA(Point pointA) {
-		this.pointA = pointA;
+
+	public void setListOfPoints(List<Point> listOfPoints) {
+		this.listOfPoints = listOfPoints;
 	}
-	public Point getPointB() {
-		return pointB;
-	}
-	public void setPointB(Point pointB) {
-		this.pointB = pointB;
-	}
-	public Point getPointC() {
-		return pointC;
-	}
-	public void setPointC(Point pointC) {
-		this.pointC = pointC;
-	}
-	
-	
 }
