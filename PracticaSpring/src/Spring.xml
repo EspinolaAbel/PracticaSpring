@@ -21,4 +21,6 @@
 		<property name="pointC" ref="point"></property> -->
 	</bean>
 	
+	<bean class="practica.MiBeanFactoryPostProcesorClass"/>
+	
 </beans>
