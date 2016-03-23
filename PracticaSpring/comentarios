@@ -1,0 +1,30 @@
+@Required annotation:
+	Esta notación me permite decirle al contenedor de Spring que atributos de una determinada
+clase, o más bien, que propiedad de un determinado bean debe ser si o si inyectada. La notación @Required le dice explicitamente
+al contenedor que atributos o propiedades son requeridos.
+
+Para usar la notación debo poner la notación @Required sobre la declaración del método setter del atributo que es requerido.
+
+En el archivo de configuración necesito poner el siguiente bean:
+
+<bean class="org.springframework.beans.factory.annotation.RequiredAnnotationBeanPostProcessor"> 
+Este bean se ejecutará inmediatamente después de que 
+¿el beanFactory se instancie? o
+¿cada bean se inicialice?
+
+	En caso de haber una propiedad anotado con @Required y al correr la aplicación no tenga ningún valor inyectado,
+entonces se lanzará una excepción en la cual se informa que tal atributo no fué inyectado.
+
+
+@Autowired annotation:
+	Similar a @Required.
+	@Autowired, por defecto hace autowiring tratando de matchear el nombre del atributo con @Autowired con el nombre de un bean.
+	Si hay un bean en el archivo de configuración con el mismo nombre que el atributo, entonces se inyecta dentro del atributo
+	ese bean. En caso de no matchear ningún nombre, entonces el autowiring se hace por tipo.
+	
+	En caso de querer matchear un atributo con un determinado bean, sin matchear ni por nombre ni por tipo, puedo usar la anotación
+	@Qualifier(unCalificador) debajo del @Autowired. En el bean que quiero matchear debo poner el siguiente tag dentro del bean
+	<qualifier name="unCalificador"/>. 
+	
+	Hay que agregar el siguiente bean en el archivo de configuración:
+		<bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>

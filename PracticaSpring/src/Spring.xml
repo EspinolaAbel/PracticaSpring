@@ -1,8 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE beans PUBLIC "-//SPRING/DTD BEAN 2.0/EN" "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
 
-<beans> <!-- default-init-method="metodo" default-destroy-method="otro metodo". Metodos que son llamados por todos los bean definidos. Los beans que ejecuten estos métodos deben tener estos metodos definidos.-->
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+
+<!-- <beans> default-init-method="metodo" default-destroy-method="otro metodo". Metodos que son llamados por todos los bean definidos. Los beans que ejecuten estos métodos deben tener estos metodos definidos.-->
 	
+	<context:annotation-config/>
+<!-- Para que esta línea funcione necesito agregar cosas al tag <beans>
+Este context:annotation-config carga automaticamente todas BeanPostProcessors. Es un atajo-->
+		
 	<bean id="point" class="practica.Point" scope="prototype">
 	</bean>
 	
@@ -16,11 +27,22 @@
 		</property>
 	
 	
-<!-- 		<property name="pointA" ref="point"></property>
+<!-- 	<property name="pointA" ref="point"></property>
 		<property name="pointB" ref="point"></property>
 		<property name="pointC" ref="point"></property> -->
 	</bean>
 	
-	<bean class="practica.MiBeanFactoryPostProcesorClass"/>
+	<bean id="circle" class="practica.Circle">
+		<property name="center" ref="pointCenterCircle"/>
+	</bean>
 	
+	<bean id="pointCenterCircle" class="practica.Point">
+		<qualifier value="unCalificadorParaMiCentro"/>
+		<property name="coordX" value="0"/>
+		<property name="coordY" value="0"/>
+	</bean>
+	
+<!-- 	<bean class="practica.MiBeanFactoryPostProcesorClass"/>
+	<bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/> -->
+			
 </beans>
