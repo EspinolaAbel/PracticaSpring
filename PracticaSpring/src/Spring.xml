@@ -44,5 +44,16 @@ Este context:annotation-config carga automaticamente todas BeanPostProcessors. E
 	
 <!-- 	<bean class="practica.MiBeanFactoryPostProcesorClass"/>
 	<bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/> -->
+	
+	
+	<!-- Este bean me permite guardar una referencia a un archivo de texto que luego voy a poder usar para obtener distintos mensajes
+	para mi aplicación.  -->
+	<bean id="messageSource" class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basenames">
+			<list>
+				<value>mymessages</value>
+			</list>
+		</property>
+	</bean>
 			
 </beans>

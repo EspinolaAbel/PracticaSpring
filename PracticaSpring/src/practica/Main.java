@@ -13,6 +13,7 @@ public class Main {
 	  	AbstractApplicationContext context = new ClassPathXmlApplicationContext("Spring.xml");
 	  	
 	  	context.registerShutdownHook();
+//	  	Con registerShutdownHook puedo llamar a todos los métodos de terminación.
 	  	
 	  	Triangle triangulo = (Triangle) context.getBean("triangle");
 	  	Circle circulo = (Circle) context.getBean(Circle.class);
@@ -22,6 +23,8 @@ public class Main {
 	  	}
 	  	
 	  	circulo.draw();
+	  	
+
 	  	
   }
 }

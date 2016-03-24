@@ -1,4 +1,5 @@
 @Required annotation:
+---------------------
 	Esta notación me permite decirle al contenedor de Spring que atributos de una determinada
 clase, o más bien, que propiedad de un determinado bean debe ser si o si inyectada. La notación @Required le dice explicitamente
 al contenedor que atributos o propiedades son requeridos.
@@ -17,6 +18,7 @@ entonces se lanzará una excepción en la cual se informa que tal atributo no fu
 
 
 @Autowired annotation:
+----------------------
 	Similar a @Required.
 	@Autowired, por defecto hace autowiring tratando de matchear el nombre del atributo con @Autowired con el nombre de un bean.
 	Si hay un bean en el archivo de configuración con el mismo nombre que el atributo, entonces se inyecta dentro del atributo
@@ -28,3 +30,50 @@ entonces se lanzará una excepción en la cual se informa que tal atributo no fu
 	
 	Hay que agregar el siguiente bean en el archivo de configuración:
 		<bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"/>
+		
+		
+JSR-250 Annotations (java standard resource annotations) 
+----------------------------------------------------
+
+	Estas anotaciones pertenecen al package javax.annotation.
+
+	@Resource(name="unNombreDeUnBean") 
+	Con esta anotación puedo inyectar una dependencia a un atributo de una clase. Esta anotación se usa justo arriba de la declaración del setter
+del atributo. Es parecido a @Autowire.
+
+	@PostConstruct
+	@PreDestroy
+	Con estas notaciones puedo declarar métodos que van a ser ejecutados después de que se instancie un objeto y antes de que este se destruya.
+Estas notaciones se deben colocar encima de mi método de inicialización y mi método de destrucción.
+
+
+Otras anotaciones - Declarar beans sin el archivo de configuración
+------------------------------------------------------------------
+
+	@Component
+	Esta anotación me permite decirle a Spring que la clase que use esta anotación es un bean.
+Hay una desventaja en comparación con declarar un bean con esta anotación a diferencia de hacerlo directamente en el archivo de configuración. Como
+@Component es una anotación que se utiliza directamente sobre la clase, solo podre tener un solo bean de esta clase.
+
+	Para usar esta anotación debo colocar el siguiente tag en el archivo de configuración de Spring:
+	
+	<context: component-scan-base package="nombreDelPaqueteAEscanearParaEncontrarBeansDeclaradosCon@Component"/>
+	
+Levantar mensajes desde un archivo de texto usando un bean que guarda referencias a dicho archivo:
+--------------------------------------------------------------------------------------------------
+
+	Debo declarar esto en el archivo de configuración de Spring:
+	
+	<bean id="messageSource" class="org.springframework.context.support.ResourceBoundleMessageSource">
+		<property name="basenames">
+			<list>
+				<value>messages</value>
+			</list>
+		</property>
+	</bean>
+	
+	La clase que utilice este archivo de texto deberá tener una variable miembro messageSource la cual tendra la anotación @Autowired. Se deben
+declarar también los getters y setters para messageSource.
+
+	El archivo de texto donde se declaran los mensajes debe tener el nombre con este formato:
+	messages.properties 
